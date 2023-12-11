@@ -76,10 +76,10 @@ def create_db(
 
     # check that our dir exists
 
-    if dir not in EXTERNAL_DATABASES:
-        try:
-            exec(f"ls {dir}")
-        except Exception:
+    try:
+        exec(f"ls {dir}")
+    except Exception:
+        if dir not in EXTERNAL_DATABASES:
             raise Exception(f"Directory {dir} not found")
 
     # if database already exists, don't create another
