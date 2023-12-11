@@ -14,6 +14,15 @@ def exec(cmd: str | list[str]) -> str:
     return subprocess.check_output(cmd, shell=True).decode()
 
 
+def to_columnar_array(arr: list[list]) -> list[list]:
+    columnar = []
+    for i in range(len(arr[0])):
+        columnar.append([])
+        for j in range(len(arr)):
+            columnar[i].append(arr[j][i])
+    return columnar
+
+
 def parse_output(filepath: str) -> list[list]:
     with open(filepath, "r") as f:
         lines = f.readlines()
@@ -40,6 +49,7 @@ def easy_search(
     temp_dir=".foldseek_cache",
     print_stdout=False,
     foldseek_executable="foldseek",
+    columnar=False,
 ) -> list[list]:
     """easy_search just calls foldseek easy-search under the hood
     TODO: use pybind to call the C++ function instead
@@ -60,7 +70,10 @@ def easy_search(
         print(stdout)
 
     # parse the text into array of arrays where each column is a data field
-    return parse_output(out_file)
+    if columnar:
+        return to_columnar_array(parse_output(out_file))
+    else:
+        return parse_output(out_file)
 
 
 def create_db(
