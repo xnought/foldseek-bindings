@@ -18,7 +18,7 @@ First install the foldseek executable and make sure it's in your path as `foldse
 For example, I can query my A.pdb with the the protein data bank proteins and find similar proteins like
 
 ```py
-from foldseek import easy_search
+from foldseek import easy_search, create_db
 
 db = create_db(dir="PDB", db_name="pdb")
 output = easy_search(
