@@ -16,7 +16,7 @@ First install the foldseek executable and make sure it's in your path as `foldse
 
 For a concrete example check out the [`example.ipynb`](./example.ipynb).
 
-Or just look here: I can query my A.pdb with the the protein data bank proteins and find similar proteins like
+Or just look here: I can query my [`A.pdb`](./test_examples/A.pdb) with the the protein data bank proteins and find similar proteins like
 
 ```py
 from foldseek import easy_search, create_db
