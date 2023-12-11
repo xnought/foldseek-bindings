@@ -55,7 +55,7 @@ where output now is the following array formatted as you specified [query, targe
  ['A.pdb', '6rbf.cif.gz_A', 1.0],
  ['A.pdb', '6n29.cif.gz_B', 1.0],
  ['A.pdb', '8d3d.cif.gz_A', 1.0],
- 			...
+ ...
  ['A.pdb', '1nqh.cif.gz_A', 0.0],
  ['A.pdb', '5nec.cif.gz_B', 0.0],
  ['A.pdb', '4b7o.cif.gz_A', 0.0],
