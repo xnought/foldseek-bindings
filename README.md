@@ -29,7 +29,7 @@ output = easy_search(
 )
 ```
 
-where output now is the following array formatted as you specified [query, target, output] for each hit/similar protein:
+where the `output` variable is now is the following array:
 
 ```py
 [['A.pdb', '1lsh.cif.gz_A', 1.0],
