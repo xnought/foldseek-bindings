@@ -1,3 +1,4 @@
 .foldseek_cache/
 out/
 __pycache__/
+pdb*
