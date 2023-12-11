@@ -1,5 +1,14 @@
 import subprocess
 
+EXTERNAL_DATABASES = [
+    "Alphafold/UniProt",
+    "Alphafold/UniProt50",
+    "Alphafold/Proteome",
+    "Alphafold/Swiss",
+    "ESMAtlas30",
+    "PDB",
+]
+
 
 def exec(cmd: str | list[str]) -> str:
     return subprocess.check_output(cmd, shell=True).decode()
@@ -54,10 +63,46 @@ def easy_search(
     return parse_output(out_file)
 
 
+def create_db(
+    dir: str,
+    db_name: str,
+    foldseek_executable="foldseek",
+    print_stdout=False,
+    temp_dir=".foldseek_cache",
+):
+    # don't continue unless they actually have foldseek installed
+    if exec(f"which {foldseek_executable}") == "":
+        raise Exception("foldseek not found in PATH")
+
+    # check that our dir exists
+
+    if dir not in EXTERNAL_DATABASES:
+        try:
+            exec(f"ls {dir}")
+        except Exception:
+            raise Exception(f"Directory {dir} not found")
+
+    # if database already exists, don't create another
+    try:
+        exec(f"ls {db_name}")
+    except Exception:
+        if dir not in EXTERNAL_DATABASES:
+            cmd = f"{foldseek_executable} createdb {dir} {db_name}"
+        else:
+            cmd = f"{foldseek_executable} databases {dir} {db_name} {temp_dir}"
+        stdout = exec(cmd)
+        if print_stdout:
+            print(stdout)
+
+    return db_name
+
+
 if __name__ == "__main__":
+    # search with the external database of pdb
+    pdb = create_db(dir="PDB", db_name="pdb")
     output = easy_search(
         query="test_examples/A.pdb",
-        target="test_examples",
+        target="pdb",
         out_format=["query", "target", "prob"],
     )
     print(output)
