@@ -14,3 +14,19 @@ In other words, there is much room for improvement here.
 
 First install the foldseek executable and make sure it's in your path as `foldseek`. 
 
+
+Then import and use like
+
+```py
+from foldseek import easy_search
+
+output = easy_search(
+	query="test_examples/A.pdb",
+	target="test_examples",
+	out_format=["query", "target", "prob"],
+)
+
+print(output)
+# >>> [['A.pdb', 'A.pdb', 1.0], 
+# 	   ['A.pdb', 'B.pdb', 0.1494]]
+```

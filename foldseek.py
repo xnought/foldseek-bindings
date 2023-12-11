@@ -25,7 +25,8 @@ def parse_output(filepath: str) -> list[list]:
 
 def easy_search(
     query: str,
-    targets: str,
+    target: str,
+    out_format: list[str] = ["query", "target", "prob"],
     out_file=".foldseek_cache/output",
     temp_dir=".foldseek_cache",
     print_stdout=False,
@@ -43,7 +44,8 @@ def easy_search(
         raise Exception("foldseek not found in PATH")
 
     # Then call the easy-search
-    cmd = f"{foldseek_executable} easy-search {query} {targets} {out_file} {temp_dir}"
+    flags = f"--format-output {','.join(out_format)}" if len(out_format) > 0 else ""
+    cmd = f"{foldseek_executable} easy-search {query} {target} {out_file} {temp_dir} {flags}"
     stdout = exec(cmd)
     if print_stdout:
         print(stdout)
@@ -53,5 +55,9 @@ def easy_search(
 
 
 if __name__ == "__main__":
-    output = easy_search("test_examples/A.pdb", "test_examples")
+    output = easy_search(
+        query="test_examples/A.pdb",
+        target="test_examples",
+        out_format=["query", "target", "prob"],
+    )
     print(output)
