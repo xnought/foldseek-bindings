@@ -110,11 +110,11 @@ def create_db(
 
 
 if __name__ == "__main__":
-    # search with the external database of pdb
-    pdb = create_db(dir="PDB", db_name="pdb")
+    # search each protein in test_examples/ with every other one
+    test_targets = create_db(dir="test_examples", db_name="test")
     output = easy_search(
-        query="test_examples/A.pdb",
-        target="pdb",
+        query=test_targets,
+        target=test_targets,
         out_format=["query", "target", "prob"],
     )
     print(output)
