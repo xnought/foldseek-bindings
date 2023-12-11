@@ -88,7 +88,6 @@ def create_db(
         raise Exception("foldseek not found in PATH")
 
     # check that our dir exists
-
     try:
         exec(f"ls {dir}")
     except Exception:
